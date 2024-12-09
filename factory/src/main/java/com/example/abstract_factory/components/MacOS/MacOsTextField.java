@@ -16,7 +16,7 @@ public class MacOsTextField implements TextField{
 
     @Override
     public String getStyle() {
-        return "MacOs Default TextField";
+        return "MacOS Default TextField";
     }
     
 }
