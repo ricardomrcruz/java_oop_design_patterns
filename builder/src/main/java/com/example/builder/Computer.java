@@ -128,8 +128,9 @@ public final class Computer {
 
     @Override
     public String toString() {
-        return String.format("Computer{cpu='%s', ramGB=%d, gpu='%s', storage='%s', " + 
-        "motherboard='%s', hasWiFi=%b, hasBluetooth=%b, " + "powerSupply='%s', cooling='%s'", 
+        return String.format("Computer{cpu='%s', ramGB=%d, gpu='%s', storage='%s', " +
+        "motherboard='%s', hasWiFi=%b, hasBluetooth=%b, " +
+        "powerSupply='%s', cooling='%s'",
         cpu, ramGB, gpu, storage, motherboard, hasWiFi, hasBluetooth, powerSupply, cooling);
     }
 
