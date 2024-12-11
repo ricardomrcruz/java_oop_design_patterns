@@ -48,16 +48,23 @@ public class ComputerBuilderTest {
     @Test
     @DisplayName("Should throw exception for null CPU")
     void validateRequiredCPU() {
-
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()->{
             new Computer.Builder(null, 16).build();
         });
-
         assertEquals("CPU specification is required", exception.getMessage());
+    }
 
-    };
 
-    
+    @Test
+    @DisplayName("Should throw exception for invalid RAM")
+    void validateRequiredRAM() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()-> {
+            new Computer.Builder("Intel i5-12600k", 0).build();
+        });
+        assertEquals("RAM must be atleast 1GB", exception.getMessage());
+    }
+
+
     
     
 }
