@@ -2,9 +2,11 @@ package com.example.builder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 
 public class ComputerBuilderTest {
 
@@ -42,5 +44,20 @@ public class ComputerBuilderTest {
         assertTrue(computer.hasWiFi());
         assertTrue(computer.hasBluetooth());
     }
+
+    @Test
+    @DisplayName("Should throw exception for null CPU")
+    void validateRequiredCPU() {
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()->{
+            new Computer.Builder(null, 16).build();
+        });
+
+        assertEquals("CPU specification is required", exception.getMessage());
+
+    };
+
+    
+    
     
 }
