@@ -64,6 +64,44 @@ public class ComputerBuilderTest {
         assertEquals("RAM must be atleast 1GB", exception.getMessage());
     }
 
+    @Test
+    @DisplayName("Should throw exception for insufficient power supply with RTX GPU")
+    void validatePowerSupplyForRtxGpu() {
+        IllegalStateException exception = assertThrows(IllegalStateException.class, ()->{
+            new Computer.Builder("Intel i5-12600k", 16)
+            .gpu("NVIDIA RTX 4080")
+            .powerSupply("500W")
+            .build();
+        });
+        assertEquals("RTX GPUs require at least 650W per supply", exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Should throw exception for i9 with air cooling")
+    void validateCoolingi9() {
+        IllegalStateException exception = assertThrows(IllegalStateException.class, ()->{
+            new Computer.Builder("Intel i9-12900k", 32)
+            .cooling("Air Cooling")
+            .build();
+        });
+        assertEquals("i9 processors require liquid cooling", exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("Should ignore null optional parameters")
+    void handleNullOptionalParameters() {
+        Computer computer = new Computer.Builder("Intel i5-12600k", 16)
+            .gpu(null)
+            .storage(null)
+            .build();
+
+        assertEquals("Integrated Graphics", computer.getGpu());
+        assertEquals(
+            "256GB SSD", computer.getStorage()
+        );
+    }
+
+
 
     
     
